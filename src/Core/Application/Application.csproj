@@ -15,8 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\LeaveType\Handlers\Cammands\" />
-    <Folder Include="Features\Requests\Cammands\" />
+    <Folder Include="Features\LeaveAllocations\Handlers\Cammands\" />
+    <Folder Include="Features\LeaveAllocations\Requests\Commands\" />
   </ItemGroup>
 
 </Project>

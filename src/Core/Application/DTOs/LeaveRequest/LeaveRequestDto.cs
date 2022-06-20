@@ -1,12 +1,13 @@
 ﻿using Application.DTOs.Common;
+using Application.DTOs.LeaveType;
 using Domain;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Application.DTOs
+namespace Application.DTOs.LeaveRequest
 {
-    public class LeaveRequestDto: BaseDto
+    public class LeaveRequestDto : BaseDto
     {
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
