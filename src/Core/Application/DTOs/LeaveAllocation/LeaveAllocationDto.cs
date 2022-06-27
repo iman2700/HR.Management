@@ -8,7 +8,7 @@ using System.Text;
 namespace Application.DTOs.LeaveAllocation
 {
     public class LeaveAllocationDto : BaseDto
-    {
+    {            
         public int NumberOfDays { get; set; }
         public DateTime DateCreated { get; set; }
 
