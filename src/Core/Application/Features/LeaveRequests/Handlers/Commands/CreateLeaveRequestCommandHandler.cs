@@ -1,6 +1,6 @@
 ﻿using Application.DTOs.LeaveRequest.Validators;
 using Application.Features.LeaveRequests.Requests.Commands;
-using Application.Persistence.Contracts;
+using Application.Contracts.Persistence;
 using Application.Responses;
 using AutoMapper;
 using MediatR;
@@ -10,6 +10,8 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Contracts.Infrastructure;
+using Application.Model;
 
 namespace Application.Features.LeaveRequests.Handlers.Commands
 {
@@ -17,18 +19,18 @@ namespace Application.Features.LeaveRequests.Handlers.Commands
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IEmailSender _emailSender;
-        private readonly IHttpContextAccessor _httpContextAccessor;
+        //private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IMapper _mapper;
 
         public CreateLeaveRequestCommandHandler(
             IUnitOfWork unitOfWork,
             IEmailSender emailSender,
-            IHttpContextAccessor httpContextAccessor,
+            //IHttpContextAccessor httpContextAccessor,
             IMapper mapper)
         {
             this._unitOfWork = unitOfWork;
             _emailSender = emailSender;
-            this._httpContextAccessor = httpContextAccessor;
+            //this._httpContextAccessor = httpContextAccessor;
             _mapper = mapper;
         }
 
@@ -37,24 +39,24 @@ namespace Application.Features.LeaveRequests.Handlers.Commands
             var response = new BaseCommandResponse();
             var validator = new CreateLeaveRequestDtoValidator(_unitOfWork.LeaveTypeRepository);
             var validationResult = await validator.ValidateAsync(request.LeaveRequestDto);
-            var userId = _httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(
-                    q => q.Type == CustomClaimTypes.Uid)?.Value;
+            //var userId = _httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(
+            //        q => q.Type == CustomClaimTypes.Uid)?.Value;
 
-            var allocation = await _unitOfWork.LeaveAllocationRepository.GetUserAllocations(userId, request.LeaveRequestDto.LeaveTypeId);
-            if (allocation is null)
-            {
-                validationResult.Errors.Add(new FluentValidation.Results.ValidationFailure(nameof(request.LeaveRequestDto.LeaveTypeId),
-                    "You do not have any allocations for this leave type."));
-            }
-            else
-            {
-                int daysRequested = (int)(request.LeaveRequestDto.EndDate - request.LeaveRequestDto.StartDate).TotalDays;
-                if (daysRequested > allocation.NumberOfDays)
-                {
-                    validationResult.Errors.Add(new FluentValidation.Results.ValidationFailure(
-                        nameof(request.LeaveRequestDto.EndDate), "You do not have enough days for this request"));
-                }
-            }
+            //var allocation = await _unitOfWork.LeaveAllocationRepository.GetUserAllocations(userId, request.LeaveRequestDto.LeaveTypeId);
+            //if (allocation is null)
+            //{
+            //    validationResult.Errors.Add(new FluentValidation.Results.ValidationFailure(nameof(request.LeaveRequestDto.LeaveTypeId),
+            //        "You do not have any allocations for this leave type."));
+            //}
+            //else
+            //{
+            //    int daysRequested = (int)(request.LeaveRequestDto.EndDate - request.LeaveRequestDto.StartDate).TotalDays;
+            //    if (daysRequested > allocation.NumberOfDays)
+            //    {
+            //        validationResult.Errors.Add(new FluentValidation.Results.ValidationFailure(
+            //            nameof(request.LeaveRequestDto.EndDate), "You do not have enough days for this request"));
+            //    }
+            //}
 
             if (validationResult.IsValid == false)
             {
@@ -64,18 +66,18 @@ namespace Application.Features.LeaveRequests.Handlers.Commands
             }
             else
             {
-                var leaveRequest = _mapper.Map<Domain.LeaveRequest>(request.LeaveRequestDto);
-                leaveRequest.RequestingEmployeeId = userId;
-                leaveRequest = await _unitOfWork.LeaveRequestRepository.Add(leaveRequest);
-                await _unitOfWork.Save();
+                //var leaveRequest = _mapper.Map<Domain.LeaveRequest>(request.LeaveRequestDto);
+                //leaveRequest.RequestingEmployeeId = userId;
+                //leaveRequest = await _unitOfWork.LeaveRequestRepository.Add(leaveRequest);
+                //await _unitOfWork.Save();
 
-                response.Success = true;
-                response.Message = "Request Created Successfully";
-                response.Id = leaveRequest.Id;
+                //response.Success = true;
+                //response.Message = "Request Created Successfully";
+                //response.Id = leaveRequest.Id;
 
                 try
                 {
-                    var emailAddress = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Email).Value;
+                  //  var emailAddress = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Email).Value;
 
                     var email = new Email
                     {

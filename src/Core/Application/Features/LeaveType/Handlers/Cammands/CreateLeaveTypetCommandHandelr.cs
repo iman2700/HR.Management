@@ -1,7 +1,7 @@
 ﻿using Application.DTOs.LeaveType.validators;
 using Application.Exceptions;
 using Application.Features.LeaveType.Requests.Cammands;
-using Application.Persistence.Contracts;
+using Application.Contracts.Persistence;
 using AutoMapper;
 using Domain;
 using MediatR;

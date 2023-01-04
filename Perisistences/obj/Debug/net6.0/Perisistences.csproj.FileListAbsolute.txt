@@ -1,0 +1,5 @@
+C:\Users\imim\source\repos\HR.Management\Perisistences\obj\Debug\net6.0\Perisistences.csproj.AssemblyReference.cache
+C:\Users\imim\source\repos\HR.Management\Perisistences\obj\Debug\net6.0\Perisistences.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\imim\source\repos\HR.Management\Perisistences\obj\Debug\net6.0\Perisistences.AssemblyInfoInputs.cache
+C:\Users\imim\source\repos\HR.Management\Perisistences\obj\Debug\net6.0\Perisistences.AssemblyInfo.cs
+C:\Users\imim\source\repos\HR.Management\Perisistences\obj\Debug\net6.0\Perisistences.csproj.CoreCompileInputs.cache
